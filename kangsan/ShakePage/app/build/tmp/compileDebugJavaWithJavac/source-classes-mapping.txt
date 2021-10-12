@@ -1,0 +1,6 @@
+com/example/shakepage/BuildConfig.java
+ com.example.shakepage.BuildConfig
+com/example/shakepage/SubActivity.java
+ com.example.shakepage.SubActivity
+com/example/shakepage/ShakeActivity.java
+ com.example.shakepage.ShakeActivity
