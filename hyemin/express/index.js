@@ -1,5 +1,6 @@
 //require
 const http = require('http');
+const req = require('request');
 const express = require('express');
 const https = require('https');
 const mysql = require('mysql');
@@ -20,19 +21,17 @@ app.post('/post', (req, res)=>{
 
     req.on('data', (data) => {
 
-        inputData = JSON.parse(data);
+        console.log(data);
 
     });
 
     req.on('end', () => {
 
-        console.log("user_id : "+inputData.user_id + " , name : "+inputData.name);
+        console.log("email : "+inputData.email + " , password : "+inputData.password);
 
     });
 
-    res.write("OK!");
-
-    res.end();
+    res.send("OK!");
 })
 
 app.listen(3000, () =>{
