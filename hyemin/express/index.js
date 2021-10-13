@@ -14,9 +14,25 @@ app.get('/', (req, res) =>{
     res.send('server made by express.js');
 
 })
-app.post('/post', function(req, res, next){
-    console.log(req.body);
-    res.redirect('/');
+app.post('/post', (req, res)=>{
+    console.log('receive data');
+    var inputData;
+
+    req.on('data', (data) => {
+
+        inputData = JSON.parse(data);
+
+    });
+
+    req.on('end', () => {
+
+        console.log("user_id : "+inputData.user_id + " , name : "+inputData.name);
+
+    });
+
+    res.write("OK!");
+
+    res.end();
 })
 
 app.listen(3000, () =>{
