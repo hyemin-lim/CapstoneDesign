@@ -25,7 +25,7 @@ app.post('/post', (req, res)=>{
 
 
     req.on('data', (data) => {
-        console.log(typeof data);
+        console.log(data);
         inputData += data.toString('utf8');
     });
 
