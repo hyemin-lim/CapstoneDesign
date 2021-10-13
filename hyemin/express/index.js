@@ -66,9 +66,9 @@ function getdata(url){
 }
 getdata('https://api.odcloud.kr/api/15037330/v1/uddi:a4e532b3-cacf-4644-96cb-9a51a2faf8b1?page=3&perPage=10&serviceKey=tl%2BhIv%2B1ffnwnlQz3Gwp%2FmF9GzGV%2B%2F4LomNKhm%2BmxUEqCj6UxPmCcil4SQ9tKnmPvMqf2BfhIfn8mujjd2rNtg%3D%3D')
     .then(function(result){
-        app.get('/api', (req, res) =>{
+        app.get('/street_light_api', (req, res) =>{
 
-            res.json({temp: result});
+            res.json({street_light: result});
         })
     return result;
 })
