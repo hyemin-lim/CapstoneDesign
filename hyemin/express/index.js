@@ -17,17 +17,19 @@ app.get('/', (req, res) =>{
 })
 app.post('/post', (req, res)=>{
     console.log('receive data');
-    var inputData;
+
+    var inputData = req.body;
 
     req.on('data', (data) => {
+        console.log("data");
+        console.log(data.toString('utf8'));
 
-        console.log(data);
 
     });
 
     req.on('end', () => {
-
-        console.log("email : "+inputData.email + " , password : "+inputData.password);
+        console.log("end");
+        //console.log("email : "+inputData.email + " , password : "+inputData.password);
 
     });
 
