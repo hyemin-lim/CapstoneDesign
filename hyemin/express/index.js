@@ -5,9 +5,12 @@ const express = require('express');
 const https = require('https');
 const mysql = require('mysql');
 const app = express();
+/*
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
+*/
+
 const connection = mysql.createConnection({
     host: 'capstonedesign.c29qjkumbsjv.us-west-2.rds.amazonaws.com',
     user: 'admin',
