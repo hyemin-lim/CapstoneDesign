@@ -5,11 +5,11 @@ const express = require('express');
 const https = require('https');
 const mysql = require('mysql');
 const app = express();
-/*
+
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-*/
+
 
 const connection = mysql.createConnection({
     host: 'capstonedesign.c29qjkumbsjv.us-west-2.rds.amazonaws.com',
@@ -24,9 +24,9 @@ app.get('/', (req, res) =>{
 app.post('/post', (req, res)=>{
     console.log('receive data');
 
-    var inputData = "";
-
-
+    var inputData = req.body;
+    res.send(req.body);
+/*
     req.on('data', (data) => {
         console.log(data);
         inputData += data.toString('utf8');
@@ -37,7 +37,7 @@ app.post('/post', (req, res)=>{
 
 
     });
-
+*/
     res.send("OK!");
 })
 
