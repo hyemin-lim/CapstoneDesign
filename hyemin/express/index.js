@@ -14,7 +14,7 @@ app.get('/', (req, res) =>{
     res.send('server made by express.js');
 
 })
-app.post('/', function(req, res, next){
+app.post('/post', function(req, res, next){
     console.log(req.body);
     res.redirect('/');
 })
