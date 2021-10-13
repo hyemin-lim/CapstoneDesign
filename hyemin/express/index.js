@@ -25,6 +25,7 @@ app.post('/post', (req, res)=>{
     console.log('receive data');
 
     var inputData = req.body;
+    console.log(inputData);
     res.send(req.body);
 /*
     req.on('data', (data) => {
@@ -38,7 +39,6 @@ app.post('/post', (req, res)=>{
 
     });
 */
-    res.send("OK!");
 })
 
 app.listen(3000, () =>{
