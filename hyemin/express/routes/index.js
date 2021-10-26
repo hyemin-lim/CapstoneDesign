@@ -1,26 +1,29 @@
 //require
+require("dotenv").config();
 const http = require('http');
 const req = require('request');
 const express = require('express');
 const https = require('https');
 const mysql = require('mysql');
-const app = express();
+const app = express.Router();
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
-
+//create DB connection
 const connection = mysql.createConnection({
-    host: 'capstonedesign.c29qjkumbsjv.us-west-2.rds.amazonaws.com',
-    user: 'admin',
-    password: "SXJKZ8YQsh4qwD7324IC",
-    database: "capstonedesign",
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PW,
+    database: process.env.DB_NAME,
 });
+//test page
 app.get('/', (req, res) =>{
     res.send('server made by express.js');
 
 })
+//receive data to client
 app.post('/post', (req, res)=>{
     console.log('receive data');
 
@@ -41,12 +44,9 @@ app.post('/post', (req, res)=>{
 */
 })
 
-app.listen(3000, () =>{
-    console.log('http server at port 3000');
-})
-
+//get data from OPEN API and insert them into the DB
 var request = require('request');
-function getdata(url){
+function getAPIdata(url){
     return new Promise(resolve => {
         request(url, function(error, response, body){
                 if(!error && response.statusCode==200){
@@ -54,8 +54,8 @@ function getdata(url){
                     const obj = JSON.parse(body);
                     const data_length = obj.currentCount;
                     const data = obj.data;
-                    connection.connect();
-                    /*
+                    //connection.connect();
+
                     for(let i = 0; i < data_length; i++){
                         var query = "insert into street_light(street_light_id, street_light_x, street_light_y) values (?, ?, ?);" //쿼리
                         var params = [data[i].표찰번호, data[i].X좌표, data[i].Y좌표]; //쿼리 변수
@@ -67,38 +67,46 @@ function getdata(url){
                             }
 
                             console.log(res);
-                        })
+                        });
                     }
-                    */
+                    //connection.end();
 
-
-                    connection.query("select * from street_light;", function(err, res, fields){
-                        if(err){
-                            console.log("query request failed");
-                            console.log(err);
-                            return ;
-                        }
-                        const jsonres = JSON.parse(JSON.stringify(res));
-
-                        resolve(jsonres);
-
-                    })
 
                 }
 
             });
     })
 }
-getdata('https://api.odcloud.kr/api/15037330/v1/uddi:a4e532b3-cacf-4644-96cb-9a51a2faf8b1?page=3&perPage=10&serviceKey=tl%2BhIv%2B1ffnwnlQz3Gwp%2FmF9GzGV%2B%2F4LomNKhm%2BmxUEqCj6UxPmCcil4SQ9tKnmPvMqf2BfhIfn8mujjd2rNtg%3D%3D')
+//getAPIdata('https://api.odcloud.kr/api/15037330/v1/uddi:a4e532b3-cacf-4644-96cb-9a51a2faf8b1?page=3&perPage=10&serviceKey=tl%2BhIv%2B1ffnwnlQz3Gwp%2FmF9GzGV%2B%2F4LomNKhm%2BmxUEqCj6UxPmCcil4SQ9tKnmPvMqf2BfhIfn8mujjd2rNtg%3D%3D');
+
+//get data from the DB
+function getDBdata(){
+    return new Promise(resolve => {
+        //connection.connect();
+        connection.query("select * from street_light;", function(err, res, fields){
+            if(err){
+                console.log("query request failed");
+                console.log(err);
+                //connection.end();
+                return ;
+            }
+            const jsonres = JSON.parse(JSON.stringify(res));
+
+            resolve(jsonres);
+
+        });
+        //connection.end();
+    });
+}
+getDBdata()
     .then(function(result){
+        //send data to client
         app.get('/street_light_api', (req, res) =>{
             res.json({street_light: result});
         })
-
-    return result;
 })
 
-
+module.exports = app;
 /*
 
 const http = require('http');
