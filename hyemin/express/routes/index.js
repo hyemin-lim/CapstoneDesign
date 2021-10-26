@@ -23,6 +23,7 @@ app.get('/', (req, res) =>{
     res.send('server made by express.js');
 
 })
+
 //receive data to client
 app.post('/post', (req, res)=>{
     console.log('receive data');
@@ -98,12 +99,21 @@ function getDBdata(){
         //connection.end();
     });
 }
+/*
 getDBdata()
     .then(function(result){
         //send data to client
         app.get('/street_light_api', (req, res) =>{
             res.json({street_light: result});
         })
+})
+*/
+app.get('/street_light_api', (req, res) =>{
+    getDBdata()
+        .then(function(result){
+            res.json({street_light: result});
+        })
+
 })
 
 module.exports = app;
