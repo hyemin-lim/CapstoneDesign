@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.sms">
+
+    <!-- 조도센서 없는건 못사용하게 구분함. -->
+    <uses-feature android:name="android.hardware.sensor.light" android:required="false"/>
+
+    <!-- 플래시 켜기 위한 카메라 권한 추가 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+
+    <!-- 문자전송 권한 -->
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
+    <!-- 위치 권한 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.LightSensor_test">
+        <activity
+            android:name=".ViewController.MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">    <!-- 참고한 곳이 여기에 오리엔테이션 추가했음.. -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
