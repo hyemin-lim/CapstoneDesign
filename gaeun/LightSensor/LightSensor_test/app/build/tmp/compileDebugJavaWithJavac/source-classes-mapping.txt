@@ -1,0 +1,5 @@
+com/example/lightsensor_test/BuildConfig.java
+ com.example.lightsensor_test.BuildConfig
+com/example/lightsensor_test/MainActivity.java
+ com.example.lightsensor_test.MainActivity
+ com.example.lightsensor_test.MainActivity$1
