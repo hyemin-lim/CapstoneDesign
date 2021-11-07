@@ -47,7 +47,7 @@ app.post('/post', (req, res)=>{
 
 //get data from OPEN API and insert them into the DB
 var request = require('request');
-function getAPIdata(url){
+function getStreetLightdata(url){
     return new Promise(resolve => {
         request(url, function(error, response, body){
                 if(!error && response.statusCode==200){
@@ -78,13 +78,64 @@ function getAPIdata(url){
             });
     })
 }
-//getAPIdata('https://api.odcloud.kr/api/15037330/v1/uddi:a4e532b3-cacf-4644-96cb-9a51a2faf8b1?page=3&perPage=10&serviceKey=tl%2BhIv%2B1ffnwnlQz3Gwp%2FmF9GzGV%2B%2F4LomNKhm%2BmxUEqCj6UxPmCcil4SQ9tKnmPvMqf2BfhIfn8mujjd2rNtg%3D%3D');
+function getAPIdata(url){
+    return new Promise(resolve => {
+        request(url, function(error, response, body){
+            if(!error && response.statusCode==200){
+                const obj = JSON.parse(body);
+                const total_length = obj.CrtfcUpsoInfo.list_total_count;
+                resolve(total_length);
+                const data = obj.CrtfcUpsoInfo.row;
+                //connection.end();
+                for(let i = 0; i < (data.length); i++){
+                    var query = "insert into restaurant(restaurant_id, restaurant_x, restaurant_y, level, restaurant_name) values (?, ?, ?, ?, ?);" //쿼리
+                    var params = [data[i].CRTFC_UPSO_MGT_SNO, data[i].X_CNTS, data[i].Y_DNTS, data[i].CRTFC_GBN_NM, data[i].UPSO_NM]; //쿼리 변수
+                    if(data[i].CGG_CODE_NM == '동작구' && data[i].X_CNTS != '0' && data[i].Y_DNTS != '0'){
+                        connection.query(query, params, function(err, res, fields){
+                            if(err){ //에러 처리
+                                console.log("query request failed");
+                                console.log(err);
+                                return ;
+                            }
 
+                            console.log(res);
+                        });
+                    }
+
+                }
+
+
+            }
+
+        });
+    })
+}
+//getStreetLightdata('https://api.odcloud.kr/api/15037330/v1/uddi:a4e532b3-cacf-4644-96cb-9a51a2faf8b1?page=3&perPage=10&serviceKey=tl%2BhIv%2B1ffnwnlQz3Gwp%2FmF9GzGV%2B%2F4LomNKhm%2BmxUEqCj6UxPmCcil4SQ9tKnmPvMqf2BfhIfn8mujjd2rNtg%3D%3D');
+/*
+getAPIdata('http://openapi.seoul.go.kr:8088/744e754e486672653332464e674b4a/json/CrtfcUpsoInfo/1/1000/')
+    .then((total_length) => {
+        let i = 1;
+        for(; i < (total_length/1000); i++){
+            console.log(i);
+            const start = i*1000+1;
+            const end = (i+1)*1000;
+            let url;
+            if(end < total_length){
+                url = 'http://openapi.seoul.go.kr:8088/744e754e486672653332464e674b4a/json/CrtfcUpsoInfo/'+start.toString()+'/'+end.toString()+'/';
+            }
+            else{
+                url = 'http://openapi.seoul.go.kr:8088/744e754e486672653332464e674b4a/json/CrtfcUpsoInfo/'+start.toString()+'/'+total_length.toString()+'/';
+            }
+            getAPIdata(url);
+        }
+
+    })
+ */
 //get data from the DB
-function getDBdata(){
+function sendDBquery(query){
     return new Promise(resolve => {
         //connection.connect();
-        connection.query("select * from street_light;", function(err, res, fields){
+        connection.query(query, function(err, res, fields){
             if(err){
                 console.log("query request failed");
                 console.log(err);
@@ -109,11 +160,17 @@ getDBdata()
 })
 */
 app.get('/street_light_api', (req, res) =>{
-    getDBdata()
+    sendDBquery("select * from street_light;")
         .then(function(result){
             res.json({street_light: result});
         })
 
+})
+app.get('/restaurant_api', (req, res) => {
+    sendDBquery("select * from restaurant;")
+        .then((result) => {
+            res.json({restaurant: result});
+        })
 })
 
 module.exports = app;
