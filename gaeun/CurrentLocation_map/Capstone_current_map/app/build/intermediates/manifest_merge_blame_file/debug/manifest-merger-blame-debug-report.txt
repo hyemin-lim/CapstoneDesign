@@ -1,0 +1,173 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.capstone_current_map"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="31" />
+9-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml:5:5-67
+11-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml:5:22-64
+12    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+12-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml:6:5-79
+12-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml:6:22-76
+13    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+13-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml:7:5-81
+13-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml:7:22-78
+14
+15    <permission
+15-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:24:5-27:47
+16        android:name="com.example.capstone_current_map.andpermission.bridge"
+16-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:25:9-61
+17        android:permissionGroup="com.example.capstone_current_map.andpermission"
+17-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:26:9-65
+18        android:protectionLevel="signature" />
+18-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:27:9-44
+19
+20    <uses-permission android:name="com.example.capstone_current_map.andpermission.bridge" /> <!-- Include required permissions for Google Maps API to run. -->
+20-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:29:5-77
+20-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:29:22-74
+21    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+21-->[com.google.android.gms:play-services-maps:17.0.1] C:\Users\imgae\.gradle\caches\transforms-3\b5c25d7a48148c73ceb291032312e2d9\transformed\jetified-play-services-maps-17.0.1\AndroidManifest.xml:23:5-79
+21-->[com.google.android.gms:play-services-maps:17.0.1] C:\Users\imgae\.gradle\caches\transforms-3\b5c25d7a48148c73ceb291032312e2d9\transformed\jetified-play-services-maps-17.0.1\AndroidManifest.xml:23:22-76
+22
+23    <uses-feature
+23-->[com.google.android.gms:play-services-maps:17.0.1] C:\Users\imgae\.gradle\caches\transforms-3\b5c25d7a48148c73ceb291032312e2d9\transformed\jetified-play-services-maps-17.0.1\AndroidManifest.xml:26:5-28:35
+24        android:glEsVersion="0x00020000"
+24-->[com.google.android.gms:play-services-maps:17.0.1] C:\Users\imgae\.gradle\caches\transforms-3\b5c25d7a48148c73ceb291032312e2d9\transformed\jetified-play-services-maps-17.0.1\AndroidManifest.xml:27:9-41
+25        android:required="true" />
+25-->[com.google.android.gms:play-services-maps:17.0.1] C:\Users\imgae\.gradle\caches\transforms-3\b5c25d7a48148c73ceb291032312e2d9\transformed\jetified-play-services-maps-17.0.1\AndroidManifest.xml:28:9-32
+26
+27    <queries>
+27-->[com.google.android.gms:play-services-maps:17.0.1] C:\Users\imgae\.gradle\caches\transforms-3\b5c25d7a48148c73ceb291032312e2d9\transformed\jetified-play-services-maps-17.0.1\AndroidManifest.xml:30:5-34:15
+28
+29        <!-- Needs to be explicitly declared on Android R+ -->
+30        <package android:name="com.google.android.apps.maps" />
+30-->[com.google.android.gms:play-services-maps:17.0.1] C:\Users\imgae\.gradle\caches\transforms-3\b5c25d7a48148c73ceb291032312e2d9\transformed\jetified-play-services-maps-17.0.1\AndroidManifest.xml:33:9-64
+30-->[com.google.android.gms:play-services-maps:17.0.1] C:\Users\imgae\.gradle\caches\transforms-3\b5c25d7a48148c73ceb291032312e2d9\transformed\jetified-play-services-maps-17.0.1\AndroidManifest.xml:33:18-61
+31    </queries>
+32
+33    <application
+33-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml:9:5-29:19
+34        android:allowBackup="true"
+34-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml:10:9-35
+35        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+35-->[androidx.core:core:1.5.0] C:\Users\imgae\.gradle\caches\transforms-3\255d63c0f9f8f5d12ab3191ffb377750\transformed\core-1.5.0\AndroidManifest.xml:24:18-86
+36        android:debuggable="true"
+37        android:icon="@mipmap/ic_launcher"
+37-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml:11:9-43
+38        android:label="@string/app_name"
+38-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml:12:9-41
+39        android:roundIcon="@mipmap/ic_launcher_round"
+39-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml:13:9-54
+40        android:supportsRtl="true"
+40-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml:14:9-35
+41        android:testOnly="true"
+42        android:theme="@style/Theme.Capstone_current_map" >
+42-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml:15:9-58
+43        <meta-data
+43-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml:17:9-123
+44            android:name="com.google.android.geo.API_KEY"
+44-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml:17:20-65
+45            android:value="AIzaSyA0jkVhG9e_4d7Lm_D8RFej_aR4_myKzmg" />
+45-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml:17:66-121
+46        <!-- api 키값 주의 -->
+47
+48        <activity
+48-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml:20:9-28:20
+49            android:name="com.example.capstone_current_map.MainActivity"
+49-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml:21:13-41
+50            android:exported="true" >
+50-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml:22:13-36
+51            <intent-filter>
+51-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml:23:13-27:29
+52                <action android:name="android.intent.action.MAIN" />
+52-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml:24:17-69
+52-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml:24:25-66
+53
+54                <category android:name="android.intent.category.LAUNCHER" />
+54-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml:26:17-77
+54-->C:\Users\imgae\AndroidStudioProjects\Capstone_current_map\app\src\main\AndroidManifest.xml:26:27-74
+55            </intent-filter>
+56        </activity>
+57
+58        <service
+58-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:32:9-40:19
+59            android:name="com.yanzhenjie.permission.bridge.BridgeService"
+59-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:33:13-74
+60            android:exported="false"
+60-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:34:13-37
+61            android:permission="com.example.capstone_current_map.andpermission.bridge"
+61-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:35:13-71
+62            android:process=":permission" >
+62-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:36:13-42
+63            <intent-filter>
+63-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:37:13-39:29
+64                <action android:name="com.example.capstone_current_map.andpermission.bridge" />
+64-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:38:17-80
+64-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:38:25-77
+65            </intent-filter>
+66        </service>
+67
+68        <activity
+68-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:42:9-48:76
+69            android:name="com.yanzhenjie.permission.bridge.BridgeActivity"
+69-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:43:13-75
+70            android:configChanges="orientation"
+70-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:44:13-48
+71            android:exported="false"
+71-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:45:13-37
+72            android:permission="com.example.capstone_current_map.andpermission.bridge"
+72-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:46:13-71
+73            android:process=":permission"
+73-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:47:13-42
+74            android:theme="@style/Permission.Theme.Activity.Transparent" />
+74-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:48:13-73
+75
+76        <provider
+76-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:50:9-58:20
+77            android:name="com.yanzhenjie.permission.FileProvider"
+77-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:51:13-66
+78            android:authorities="com.example.capstone_current_map.file.path.share"
+78-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:52:13-67
+79            android:exported="false"
+79-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:53:13-37
+80            android:grantUriPermissions="true" >
+80-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:54:13-47
+81            <meta-data
+81-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:55:13-57:65
+82                android:name="android.support.FILE_PROVIDER_PATHS"
+82-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:56:17-67
+83                android:resource="@xml/permission_file_paths" />
+83-->[com.yanzhenjie:permission:2.0.3] C:\Users\imgae\.gradle\caches\transforms-3\0c9e3712f8477d7d64c30bd88222a631\transformed\jetified-permission-2.0.3\AndroidManifest.xml:57:17-62
+84        </provider> <!-- Needs to be explicitly declared on P+ -->
+85        <uses-library
+85-->[com.google.android.gms:play-services-maps:17.0.1] C:\Users\imgae\.gradle\caches\transforms-3\b5c25d7a48148c73ceb291032312e2d9\transformed\jetified-play-services-maps-17.0.1\AndroidManifest.xml:39:9-41:40
+86            android:name="org.apache.http.legacy"
+86-->[com.google.android.gms:play-services-maps:17.0.1] C:\Users\imgae\.gradle\caches\transforms-3\b5c25d7a48148c73ceb291032312e2d9\transformed\jetified-play-services-maps-17.0.1\AndroidManifest.xml:40:13-50
+87            android:required="false" />
+87-->[com.google.android.gms:play-services-maps:17.0.1] C:\Users\imgae\.gradle\caches\transforms-3\b5c25d7a48148c73ceb291032312e2d9\transformed\jetified-play-services-maps-17.0.1\AndroidManifest.xml:41:13-37
+88
+89        <activity
+89-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\imgae\.gradle\caches\transforms-3\7adb15563f6c430089a337c415b07142\transformed\jetified-play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+90            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+90-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\imgae\.gradle\caches\transforms-3\7adb15563f6c430089a337c415b07142\transformed\jetified-play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+91            android:exported="false"
+91-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\imgae\.gradle\caches\transforms-3\7adb15563f6c430089a337c415b07142\transformed\jetified-play-services-base-17.0.0\AndroidManifest.xml:25:13-37
+92            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+92-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\imgae\.gradle\caches\transforms-3\7adb15563f6c430089a337c415b07142\transformed\jetified-play-services-base-17.0.0\AndroidManifest.xml:26:13-72
+93
+94        <meta-data
+94-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\imgae\.gradle\caches\transforms-3\04c41a622b11bbd1762f8b6dda91ff26\transformed\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+95            android:name="com.google.android.gms.version"
+95-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\imgae\.gradle\caches\transforms-3\04c41a622b11bbd1762f8b6dda91ff26\transformed\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
+96            android:value="@integer/google_play_services_version" />
+96-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\imgae\.gradle\caches\transforms-3\04c41a622b11bbd1762f8b6dda91ff26\transformed\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
+97    </application>
+98
+99</manifest>
