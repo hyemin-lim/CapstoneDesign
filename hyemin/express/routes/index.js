@@ -78,7 +78,7 @@ function getStreetLightdata(url){
             });
     })
 }
-function getAPIdata(url){
+function getAPI(url){
     return new Promise(resolve => {
         request(url, function(error, response, body){
             if(!error && response.statusCode==200){
@@ -110,6 +110,36 @@ function getAPIdata(url){
         });
     })
 }
+function getAPIdata(url){
+    return new Promise(resolve => {
+        request(url, function(error, response, body){
+            if(!error && response.statusCode==200){
+                const obj = JSON.parse(body);
+                resolve(obj);
+            }
+
+        });
+    })
+}
+
+function putJaywalkingIntoDB(){
+    var url = 'http://apis.data.go.kr/B552061/jaywalking/getRestJaywalking';
+    var queryParams = '?' + encodeURIComponent('serviceKey') + '=to8ZD63xPeCI3fmOrg%2B8ou7NFlDwTIeVI1w6EzhcG8PGxaPCaALhdSIXHiK7k4Ltr6yDPlaac8ywfdvpYQRzzQ%3D%3D'; /* Service Key*/
+    queryParams += '&' + encodeURIComponent('searchYearCd') + '=' + encodeURIComponent('2019'); /* */
+    queryParams += '&' + encodeURIComponent('siDo') + '=' + encodeURIComponent('11'); /* */
+    queryParams += '&' + encodeURIComponent('guGun') + '=' + encodeURIComponent('590'); /* */
+    queryParams += '&' + encodeURIComponent('type') + '=' + encodeURIComponent('json'); /* */
+    queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10'); /* */
+    queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /* */
+    getAPIdata(url + queryParams)
+        .then((obj) => {
+            for (let i = 0; i < obj.totalCount; i++){
+                console.log(obj.items);
+                //sendDBquery("insert into traffic_danger_zone(traffic_danger_zone_center_x, traffic_danger_zone_center_y) values ("+obj.items.item[i].lo_crd+","+obj.items.item[i].la_crd+");");
+            }
+        });
+}
+putJaywalkingIntoDB();
 //getStreetLightdata('https://api.odcloud.kr/api/15037330/v1/uddi:a4e532b3-cacf-4644-96cb-9a51a2faf8b1?page=3&perPage=10&serviceKey=tl%2BhIv%2B1ffnwnlQz3Gwp%2FmF9GzGV%2B%2F4LomNKhm%2BmxUEqCj6UxPmCcil4SQ9tKnmPvMqf2BfhIfn8mujjd2rNtg%3D%3D');
 /*
 getAPIdata('http://openapi.seoul.go.kr:8088/744e754e486672653332464e674b4a/json/CrtfcUpsoInfo/1/1000/')
@@ -170,6 +200,13 @@ app.get('/restaurant_api', (req, res) => {
     sendDBquery("select * from restaurant;")
         .then((result) => {
             res.json({restaurant: result});
+        })
+})
+
+app.get('/restaurant_review', (req, res) => {
+    sendDBquery("select * from restaurant_review;")
+        .then((result) => {
+            res.json({restaurant_review: result});
         })
 })
 
@@ -250,5 +287,6 @@ function apiRequest() {
         request.end();
 
 }
+"insert into user_info(user_id,user_pwd) values ("+event.userName+","+event.request.userAttributes.string+");"
 */
 
