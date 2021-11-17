@@ -1,0 +1,10 @@
+com/example/maptest/BuildConfig.java
+ com.example.maptest.BuildConfig
+com/example/maptest/databinding/ActivityMapsBinding.java
+ com.example.maptest.databinding.ActivityMapsBinding
+com/example/maptest/MapsActivity.java
+ com.example.maptest.MapsActivity
+ com.example.maptest.MapsActivity$1
+ com.example.maptest.MapsActivity$2
+ com.example.maptest.MapsActivity$3
+ com.example.maptest.MapsActivity$Crosswalk
