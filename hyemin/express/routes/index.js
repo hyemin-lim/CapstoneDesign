@@ -30,6 +30,17 @@ app.post('/post', (req, res)=>{
 
     var inputData = req.body;
     console.log(inputData);
+    let review;
+    if(req.body.report == "좋음"){
+        review = "TRUE";
+    }
+    else{
+        review = "FALSE";
+    }
+    let lat = req.body.lat;
+    let lng = req.body.lng;
+    var q = "insert into restaurant_review(review, latitude, longitude) values (" + review + "," + lat.toString() + "," + lng.toString() + ");";
+    sendDBquery(q);
     res.send(req.body);
 /*
     req.on('data', (data) => {
@@ -139,7 +150,7 @@ function putJaywalkingIntoDB(){
             }
         });
 }
-putJaywalkingIntoDB();
+//putJaywalkingIntoDB();
 //getStreetLightdata('https://api.odcloud.kr/api/15037330/v1/uddi:a4e532b3-cacf-4644-96cb-9a51a2faf8b1?page=3&perPage=10&serviceKey=tl%2BhIv%2B1ffnwnlQz3Gwp%2FmF9GzGV%2B%2F4LomNKhm%2BmxUEqCj6UxPmCcil4SQ9tKnmPvMqf2BfhIfn8mujjd2rNtg%3D%3D');
 /*
 getAPIdata('http://openapi.seoul.go.kr:8088/744e754e486672653332464e674b4a/json/CrtfcUpsoInfo/1/1000/')
