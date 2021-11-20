@@ -41,7 +41,6 @@ app.post('/post', (req, res)=>{
     let lng = req.body.lng;
     var q = "insert into restaurant_review(review, latitude, longitude) values (" + review + "," + lat.toString() + "," + lng.toString() + ");";
     sendDBquery(q);
-    res.send(req.body);
 /*
     req.on('data', (data) => {
         console.log(data);
@@ -135,20 +134,21 @@ function getAPIdata(url){
 
 function putJaywalkingIntoDB(){
     var url = 'http://apis.data.go.kr/B552061/jaywalking/getRestJaywalking';
-    var queryParams = '?' + encodeURIComponent('serviceKey') + '=to8ZD63xPeCI3fmOrg%2B8ou7NFlDwTIeVI1w6EzhcG8PGxaPCaALhdSIXHiK7k4Ltr6yDPlaac8ywfdvpYQRzzQ%3D%3D'; /* Service Key*/
-    queryParams += '&' + encodeURIComponent('searchYearCd') + '=' + encodeURIComponent('2019'); /* */
-    queryParams += '&' + encodeURIComponent('siDo') + '=' + encodeURIComponent('11'); /* */
-    queryParams += '&' + encodeURIComponent('guGun') + '=' + encodeURIComponent('590'); /* */
-    queryParams += '&' + encodeURIComponent('type') + '=' + encodeURIComponent('json'); /* */
-    queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10'); /* */
-    queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /* */
-    getAPIdata(url + queryParams)
-        .then((obj) => {
-            for (let i = 0; i < obj.totalCount; i++){
-                console.log(obj.items);
-                //sendDBquery("insert into traffic_danger_zone(traffic_danger_zone_center_x, traffic_danger_zone_center_y) values ("+obj.items.item[i].lo_crd+","+obj.items.item[i].la_crd+");");
-            }
-        });
+    for (let i = 2012; i < 2020; i++){
+        var queryParams = '?' + encodeURIComponent('serviceKey') + '=to8ZD63xPeCI3fmOrg%2B8ou7NFlDwTIeVI1w6EzhcG8PGxaPCaALhdSIXHiK7k4Ltr6yDPlaac8ywfdvpYQRzzQ%3D%3D'; /* Service Key*/
+        queryParams += '&' + encodeURIComponent('searchYearCd') + '=' + encodeURIComponent(i.toString()); /*2012~2019 */
+        queryParams += '&' + encodeURIComponent('siDo') + '=' + encodeURIComponent('11'); /* */
+        queryParams += '&' + encodeURIComponent('guGun') + '=' + encodeURIComponent('590'); /* */
+        queryParams += '&' + encodeURIComponent('type') + '=' + encodeURIComponent('json'); /* */
+        queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10'); /* */
+        queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /* */
+        getAPIdata(url + queryParams)
+            .then((obj) => {
+                for (let i = 0; i < obj.totalCount; i++){
+                    sendDBquery("insert into traffic_danger_zone(traffic_danger_zone_center_x, traffic_danger_zone_center_y) values ("+obj.items.item[i].lo_crd+","+obj.items.item[i].la_crd+");");
+                }
+            });
+    }
 }
 //putJaywalkingIntoDB();
 //getStreetLightdata('https://api.odcloud.kr/api/15037330/v1/uddi:a4e532b3-cacf-4644-96cb-9a51a2faf8b1?page=3&perPage=10&serviceKey=tl%2BhIv%2B1ffnwnlQz3Gwp%2FmF9GzGV%2B%2F4LomNKhm%2BmxUEqCj6UxPmCcil4SQ9tKnmPvMqf2BfhIfn8mujjd2rNtg%3D%3D');
@@ -220,6 +220,13 @@ app.get('/restaurant_review', (req, res) => {
             res.json({restaurant_review: result});
         })
 })
+app.get('/traffic_danger_zone', (req, res) => {
+    sendDBquery("select * from traffic_danger_zone;")
+        .then((result) => {
+            res.json({traffic_danger_zone: result});
+        })
+})
+
 
 module.exports = app;
 /*
