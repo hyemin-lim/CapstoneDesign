@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ThirdActivity">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="87dp"
+        android:layout_height="40dp"
+        android:layout_x="186dp"
+        android:layout_y="88dp"
+        android:text="이름" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="86dp"
+        android:layout_height="89dp"
+        android:layout_x="50dp"
+        android:layout_y="527dp"
+        android:background="@drawable/call" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="106dp"
+        android:layout_height="104dp"
+        android:layout_x="283dp"
+        android:layout_y="521dp"
+        android:background="@drawable/reject" />
+
+
+</AbsoluteLayout>
