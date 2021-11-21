@@ -1,0 +1,27 @@
+com/example/maptest/MapsActivity.java
+ com.example.maptest.MapsActivity
+ com.example.maptest.MapsActivity$1
+ com.example.maptest.MapsActivity$2
+ com.example.maptest.MapsActivity$3
+ com.example.maptest.MapsActivity$4
+com/example/maptest/databinding/ActivityMainBinding.java
+ com.example.maptest.databinding.ActivityMainBinding
+com/example/maptest/databinding/ActivityMapsBinding.java
+ com.example.maptest.databinding.ActivityMapsBinding
+com/example/maptest/ThirdActivity.java
+ com.example.maptest.ThirdActivity
+ com.example.maptest.ThirdActivity$1
+ com.example.maptest.ThirdActivity$2
+com/example/maptest/BuildConfig.java
+ com.example.maptest.BuildConfig
+com/example/maptest/MainActivity.java
+ com.example.maptest.MainActivity
+ com.example.maptest.MainActivity$1
+ com.example.maptest.MainActivity$AccelListener
+ com.example.maptest.MainActivity$GyroListener
+com/example/maptest/SubActivity.java
+ com.example.maptest.SubActivity
+com/example/maptest/databinding/ActivitySubBinding.java
+ com.example.maptest.databinding.ActivitySubBinding
+com/example/maptest/databinding/ActivityThirdBinding.java
+ com.example.maptest.databinding.ActivityThirdBinding
