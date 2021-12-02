@@ -24,7 +24,7 @@ app.get('/', (req, res) =>{
 
 })
 
-//receive data to client
+//receive data from client
 app.post('/post', (req, res)=>{
     console.log('receive data');
 
@@ -88,7 +88,9 @@ function getStreetLightdata(url){
             });
     })
 }
-function getAPI(url){
+
+//식품안전 데이터 불러오기
+function getRestaurantAPI(url){
     return new Promise(resolve => {
         request(url, function(error, response, body){
             if(!error && response.statusCode==200){
@@ -131,25 +133,32 @@ function getAPIdata(url){
         });
     })
 }
-
+function putCrossWalkIntoDB(){
+    var url = 'https://api.odcloud.kr/api/15076675/v1/uddi:a3c571d3-7203-4bba-a8ae-8fa92b65a0c2?page=1&perPage=20&returnType=json&serviceKey=to8ZD63xPeCI3fmOrg%2B8ou7NFlDwTIeVI1w6EzhcG8PGxaPCaALhdSIXHiK7k4Ltr6yDPlaac8ywfdvpYQRzzQ%3D%3D';
+    getAPIdata(url)
+        .then((obj) => {
+            for (let i = 0; i < obj.currentCount; i++){
+                sendDBquery("insert into traffic_light(traffic_light_id, traffic_light_x, traffic_light_y) values (" + obj.data[i].연번 + "," + obj.data[i].경도 + "," + obj.data[i].위도 + ");");
+            }
+        });
+}
 function putJaywalkingIntoDB(){
     var url = 'http://apis.data.go.kr/B552061/jaywalking/getRestJaywalking';
-    for (let i = 2012; i < 2020; i++){
-        var queryParams = '?' + encodeURIComponent('serviceKey') + '=to8ZD63xPeCI3fmOrg%2B8ou7NFlDwTIeVI1w6EzhcG8PGxaPCaALhdSIXHiK7k4Ltr6yDPlaac8ywfdvpYQRzzQ%3D%3D'; /* Service Key*/
-        queryParams += '&' + encodeURIComponent('searchYearCd') + '=' + encodeURIComponent(i.toString()); /*2012~2019 */
-        queryParams += '&' + encodeURIComponent('siDo') + '=' + encodeURIComponent('11'); /* */
-        queryParams += '&' + encodeURIComponent('guGun') + '=' + encodeURIComponent('590'); /* */
-        queryParams += '&' + encodeURIComponent('type') + '=' + encodeURIComponent('json'); /* */
-        queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10'); /* */
-        queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /* */
-        getAPIdata(url + queryParams)
-            .then((obj) => {
-                for (let i = 0; i < obj.totalCount; i++){
-                    sendDBquery("insert into traffic_danger_zone(traffic_danger_zone_center_x, traffic_danger_zone_center_y) values ("+obj.items.item[i].lo_crd+","+obj.items.item[i].la_crd+");");
-                }
-            });
-    }
+    var queryParams = '?' + encodeURIComponent('serviceKey') + '=to8ZD63xPeCI3fmOrg%2B8ou7NFlDwTIeVI1w6EzhcG8PGxaPCaALhdSIXHiK7k4Ltr6yDPlaac8ywfdvpYQRzzQ%3D%3D'; /* Service Key*/
+    queryParams += '&' + encodeURIComponent('searchYearCd') + '=' + encodeURIComponent('2019'); /*2012~2019 */
+    queryParams += '&' + encodeURIComponent('siDo') + '=' + encodeURIComponent('11'); /* */
+    queryParams += '&' + encodeURIComponent('guGun') + '=' + encodeURIComponent('590'); /* */
+    queryParams += '&' + encodeURIComponent('type') + '=' + encodeURIComponent('json'); /* */
+    queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10'); /* */
+    queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /* */
+    getAPIdata(url + queryParams)
+        .then((obj) => {
+            for (let i = 0; i < obj.totalCount; i++){
+                sendDBquery("insert into traffic_danger_zone(traffic_danger_zone_center_x, traffic_danger_zone_center_y) values ("+obj.items.item[i].lo_crd+","+obj.items.item[i].la_crd+");");
+            }
+        });
 }
+//putCrossWalkIntoDB();
 //putJaywalkingIntoDB();
 //getStreetLightdata('https://api.odcloud.kr/api/15037330/v1/uddi:a4e532b3-cacf-4644-96cb-9a51a2faf8b1?page=3&perPage=10&serviceKey=tl%2BhIv%2B1ffnwnlQz3Gwp%2FmF9GzGV%2B%2F4LomNKhm%2BmxUEqCj6UxPmCcil4SQ9tKnmPvMqf2BfhIfn8mujjd2rNtg%3D%3D');
 /*
@@ -175,7 +184,6 @@ getAPIdata('http://openapi.seoul.go.kr:8088/744e754e486672653332464e674b4a/json/
 //get data from the DB
 function sendDBquery(query){
     return new Promise(resolve => {
-        //connection.connect();
         connection.query(query, function(err, res, fields){
             if(err){
                 console.log("query request failed");
@@ -188,7 +196,6 @@ function sendDBquery(query){
             resolve(jsonres);
 
         });
-        //connection.end();
     });
 }
 /*
@@ -226,85 +233,27 @@ app.get('/traffic_danger_zone', (req, res) => {
             res.json({traffic_danger_zone: result});
         })
 })
+app.get('/crosswalk_api', (req, res) => {
+    sendDBquery("select * from traffic_light;")
+        .then((result) => {
+            res.json({crosswalk: result});
+        })
+})
+app.get('/jaywalking_api', (req, res) => {
+    var url = 'http://apis.data.go.kr/B552061/jaywalking/getRestJaywalking';
+    var queryParams = '?' + encodeURIComponent('serviceKey') + '=to8ZD63xPeCI3fmOrg%2B8ou7NFlDwTIeVI1w6EzhcG8PGxaPCaALhdSIXHiK7k4Ltr6yDPlaac8ywfdvpYQRzzQ%3D%3D'; /* Service Key*/
+    queryParams += '&' + encodeURIComponent('searchYearCd') + '=' + encodeURIComponent('2019'); /*2012~2019 */
+    queryParams += '&' + encodeURIComponent('siDo') + '=' + encodeURIComponent('11'); /* */
+    queryParams += '&' + encodeURIComponent('guGun') + '=' + encodeURIComponent('590'); /* */
+    queryParams += '&' + encodeURIComponent('type') + '=' + encodeURIComponent('json'); /* */
+    queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10'); /* */
+    queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /* */
+    getAPIdata(url + queryParams)
+        .then((obj) => {
+            jsonobj = JSON.parse(obj.items.item[0].geom_json);
+            res.json({type: jsonobj.type, coordinates: jsonobj.coordinates});
+        });
+})
 
 
 module.exports = app;
-/*
-
-const http = require('http');
-const https = require('https');
-const mysql = require('mysql');
-const { API_HOST_NAME, API_URL_PATH, DATABASE_KEY} = process.env; // 람다 환경변수 값을 읽어옴.
-const api_options = { host: API_HOST_NAME, path: API_URL_PATH, method: 'GET' };
-const connection = mysql.createConnection({
-  host: config.npd.host,
-  user: config.npd.user,
-  password: config.npd.password,
-  database: config.npd.database,
-});
-exports.handler = async function(event, context) {
-    const promise = new Promise(apiRequest);
-    return promise;
-};
-
-function apiRequest() {
-    let start_date = new Date();
-    let end_date = new Date();
-    let body_data = '';
-    console.log('start.');
-
-    const request = http.request(api_options, function(response) {
-        console.log('response.statusCode : ' + response.statusCode);
-
-        if(response.statusCode != 200) {
-            console.log('Failed', 'response.statusCode : ' + response.statusCode);
-            return;
-        }
-
-        // 응답 데이타를 받을때
-        response.on('data', function(body_chunk) {
-            console.log('response.on.body : ' + body_chunk);
-            const obj = JSON.parse(body_chunk);
-            const data_length = obj.currentCount;
-            const data = obj.data;
-            connection.connect();
-            connection.query("select * from street_light", function(err, res, fields){
-                if(err){
-                    console.log("query request failed");
-                    console.log(err);
-                    return ;
-                }
-
-                console.log(res[0]);
-            })
-        });
-
-        // 응답 데이타가 끝났을때
-        response.on('end', function() {
-            if(body_data.startsWith('OK')) {
-                end_date = new Date();
-                let duration_time = (end_date - start_date) / 1000;
-                console.log('Success (' + (duration_time) + '초)', body_data);
-            } else {
-                console.log('Failed', body_data);
-
-            }
-        });
-    });
-    // 요청 timeout
-    request.on('timeout', function() {
-        console.log('timeout');
-        //request.abort();
-        });
-        // 요청 에러
-        request.on('error', function(error) {
-            console.log('api call failed');
-            console.log(error);
-
-        });
-        request.end();
-
-}
-"insert into user_info(user_id,user_pwd) values ("+event.userName+","+event.request.userAttributes.string+");"
-*/
-
