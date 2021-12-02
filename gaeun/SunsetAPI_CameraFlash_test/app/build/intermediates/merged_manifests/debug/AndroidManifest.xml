@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.sunsetapi_cameraflash_test"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="26"
+        android:targetSdkVersion="31" />
+
+    <!-- Todo:- 조도센서 없는건 못사용하게 구분함. -->
+    <uses-feature
+        android:name="android.hardware.sensor.light"
+        android:required="false" />
+
+    <!-- Todo:- 카메라 허용 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+
+    <!-- Todo:- 네트워크 사용에 대한 퍼미션 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:debuggable="true"
+        android:extractNativeLibs="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:testOnly="true"
+        android:theme="@style/Theme.SunsetAPI_CameraFlash_test"
+        android:usesCleartextTraffic="true" > <!-- Todo:- 모든 http 통신 가능함 -->
+        <activity
+            android:name="com.example.sunsetapi_cameraflash_test.ViewController.MainActivity"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- Todo:- 알람 보내기 -->
+        <receiver
+            android:name="com.example.sunsetapi_cameraflash_test.ViewController.AlarmReceiver"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

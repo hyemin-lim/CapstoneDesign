@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.authtest">
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the "MyLocation" functionality.
+    -->
+    <!-- Todo:- 조도센서 없는건 못사용하게 구분함. -->
+    <uses-feature android:name="android.hardware.sensor.light" android:required="false"/>
+    <!-- Todo: 문자전송 권한 -->
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <!-- Todo:- 진동 알람 위해 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- Todo:- 로그인 위해 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Todo:- 인터넷 사용 위해 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Todo:- 카메라로 찍어서 저장하기 위해 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- Todo:- 카메라로 사진을 찍기 위해해 -->
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.location.gps" />
+    <!-- TODO: 실시간 GPS 사용 권한 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_main"
+        android:label="merged"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_main"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Authtest"
+        android:usesCleartextTraffic="true"><!-- Todo:- 모든 http 통신 가능함 -->
+        <activity
+            android:name=".ViewController.Call"
+            android:exported="true" />
+        <activity
+            android:name=".ViewController.CameraCapture"
+            android:exported="true" />
+        <activity
+            android:name=".ViewController.RestaurantReview"
+            android:exported="true" />
+        <activity
+            android:name=".ViewController.MapsActivity"
+            android:exported="true" />
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
+
+        <activity
+            android:name=".ViewController.AuthActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <receiver android:name=".ViewController.AlarmReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

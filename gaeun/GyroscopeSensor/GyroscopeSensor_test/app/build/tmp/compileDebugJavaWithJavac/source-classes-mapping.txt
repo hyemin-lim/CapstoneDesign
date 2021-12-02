@@ -1,0 +1,6 @@
+com/example/gyroscopesensor_test/BuildConfig.java
+ com.example.gyroscopesensor_test.BuildConfig
+com/example/gyroscopesensor_test/MainActivity.java
+ com.example.gyroscopesensor_test.MainActivity
+ com.example.gyroscopesensor_test.MainActivity$1
+ com.example.gyroscopesensor_test.MainActivity$GyroscopeListener

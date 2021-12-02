@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.capstone_current_map"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="21"
+        android:targetSdkVersion="31" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <permission
+        android:name="com.example.capstone_current_map.andpermission.bridge"
+        android:permissionGroup="com.example.capstone_current_map.andpermission"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.example.capstone_current_map.andpermission.bridge" /> <!-- Include required permissions for Google Maps API to run. -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <queries>
+
+        <!-- Needs to be explicitly declared on Android R+ -->
+        <package android:name="com.google.android.apps.maps" />
+    </queries>
+
+    <application
+        android:allowBackup="true"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:debuggable="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:testOnly="true"
+        android:theme="@style/Theme.Capstone_current_map" >
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA0jkVhG9e_4d7Lm_D8RFej_aR4_myKzmg" />
+        <!-- api 키값 주의 -->
+
+        <activity
+            android:name="com.example.capstone_current_map.MainActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="com.yanzhenjie.permission.bridge.BridgeService"
+            android:exported="false"
+            android:permission="com.example.capstone_current_map.andpermission.bridge"
+            android:process=":permission" >
+            <intent-filter>
+                <action android:name="com.example.capstone_current_map.andpermission.bridge" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name="com.yanzhenjie.permission.bridge.BridgeActivity"
+            android:configChanges="orientation"
+            android:exported="false"
+            android:permission="com.example.capstone_current_map.andpermission.bridge"
+            android:process=":permission"
+            android:theme="@style/Permission.Theme.Activity.Transparent" />
+
+        <provider
+            android:name="com.yanzhenjie.permission.FileProvider"
+            android:authorities="com.example.capstone_current_map.file.path.share"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/permission_file_paths" />
+        </provider> <!-- Needs to be explicitly declared on P+ -->
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+
+        <activity
+            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+    </application>
+
+</manifest>
