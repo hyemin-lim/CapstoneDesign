@@ -122,17 +122,7 @@ function getRestaurantAPI(url){
         });
     })
 }
-function getAPIdata(url){
-    return new Promise(resolve => {
-        request(url, function(error, response, body){
-            if(!error && response.statusCode==200){
-                const obj = JSON.parse(body);
-                resolve(obj);
-            }
 
-        });
-    })
-}
 function putCrossWalkIntoDB(){
     var url = 'https://api.odcloud.kr/api/15076675/v1/uddi:a3c571d3-7203-4bba-a8ae-8fa92b65a0c2?page=1&perPage=20&returnType=json&serviceKey=to8ZD63xPeCI3fmOrg%2B8ou7NFlDwTIeVI1w6EzhcG8PGxaPCaALhdSIXHiK7k4Ltr6yDPlaac8ywfdvpYQRzzQ%3D%3D';
     getAPIdata(url)
@@ -198,15 +188,19 @@ function sendDBquery(query){
         });
     });
 }
-/*
-getDBdata()
-    .then(function(result){
-        //send data to client
-        app.get('/street_light_api', (req, res) =>{
-            res.json({street_light: result});
-        })
-})
-*/
+//get data from OPEN API
+function getAPIdata(url){
+    return new Promise(resolve => {
+        request(url, function(error, response, body){
+            if(!error && response.statusCode==200){
+                const obj = JSON.parse(body);
+                resolve(obj);
+            }
+
+        });
+    })
+}
+//send data through server
 app.get('/street_light_api', (req, res) =>{
     sendDBquery("select * from street_light;")
         .then(function(result){
